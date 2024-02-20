@@ -1,4 +1,5 @@
 data
 docker
 docs
+examples
 fastchat

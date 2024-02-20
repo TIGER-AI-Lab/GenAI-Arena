@@ -1,0 +1,53 @@
+{
+    "gpt-4-vision-preview": {
+        "MMMU": 56.8,
+        "Link": "https://openai.com/research/gpt-4",
+        "License": "Proprietary",
+        "Organization": "OpenAI"
+    },
+    "gemini-pro-vision": {
+        "MMMU": 47.9,
+        "Link": "https://gemini.google.com/app",
+        "License": "Proprietary",
+        "Organization": "Google"
+    },
+    "llava-v1.6-34b": {
+        "MMMU": 51.1,
+        "Link": "https://huggingface.co/liuhaotian/llava-v1.6-34b",
+        "License": "Apache-2.0",
+        "Organization": "UW Madison",
+        "starting_from": "2024-02-10-14:00-PT"
+    },
+    "cogvlm-chat-hf": {
+        "MMMU": 32.1,
+        "Link": "https://huggingface.co/THUDM/cogvlm-chat-hf",
+        "License": "Apache-2.0",
+        "Organization": "Tsinghua Univ.",
+        "starting_from": "2024-02-09-12:00-PT"
+    },
+    "Qwen-VL-Chat": {
+        "MMMU": 35.9,
+        "Link": "https://huggingface.co/Qwen/Qwen-VL-Chat",
+        "License": "Tongyi Qianwen LICENSE",
+        "Organization": "Alibaba",
+        "starting_from": "2024-02-09-12:00-PT"
+    },
+    "MiniCPM-V": {
+        "MMMU": 34.7,
+        "Link": "https://huggingface.co/openbmb/MiniCPM-V",
+        "License": "Apache-2.0",
+        "Organization": "OpenBMB"
+    },
+    "llava-v1.6-vicuna-7b": {
+        "MMMU": "-",
+        "Link": "https://huggingface.co/liuhaotian/llava-v1.6-vicuna-7b",
+        "License": "LLAMA 2 Community License",
+        "Organization": "UW Madison"
+    },
+    "instructblip-vicuna-7b": {
+        "MMMU": "-",
+        "Link": "https://huggingface.co/Salesforce/instructblip-vicuna-7b",
+        "License": "-",
+        "Organization": "Salesforce"
+    }
+}

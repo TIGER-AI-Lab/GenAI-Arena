@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "arena_elo"
+version = "0.2.35"
+description = "Elo rating system for WildVision Bench Arena"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+]
+dependencies = [
+    "numpy", "prompt_toolkit>=3.0.0", "uvicorn","polyglot", "pyicu", "pycld2", "morfessor", "scikit-learn",
+    "pytz", "tqdm", "pandas", "plotly", "fire", "Pillow"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/WildVision-Bench/Arena-Elo"
+"Bug Tracker" = "https://github.com/WildVision-Bench/Arena-Elo/issues"
+
+[tool.setuptools.packages.find]
+exclude = ["assets*", "benchmark*", "docs", "dist*", "playground*", "scripts*", "tests*"]
+
+[tool.wheel]
+exclude = ["assets*", "benchmark*", "docs", "dist*", "playground*", "scripts*", "tests*"]
