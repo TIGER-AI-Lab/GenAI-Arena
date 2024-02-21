@@ -9,20 +9,20 @@
         "License": "Playground v2 Community License",
         "Organization": "Playground"
     },
-    "Openjourney": {
+    "OpenJourney": {
         "Link": "https://huggingface.co/prompthero/openjourney",
         "License": "creativeml-openrail-m",
-        "Organization": "PromptHero",
+        "Organization": "PromptHero"
     },
     "SDXLTurbo": {
         "Link": "https://huggingface.co/stabilityai/sdxl-turbo",
         "License": "sai-nc-community (other)",
-        "Organization": "Stability AI",
+        "Organization": "Stability AI"
     },
     "SDXL": {
         "Link": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0",
         "License": "openrail++",
-        "Organization": "Stability AI",
+        "Organization": "Stability AI"
     },
     "PixArtAlpha": {
         "Link": "https://huggingface.co/PixArt-alpha/PixArt-XL-2-1024-MS",

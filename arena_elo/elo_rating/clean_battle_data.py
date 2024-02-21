@@ -125,7 +125,7 @@ def load_image(image_path):
         return None
 
 def clean_battle_data(
-    log_files, exclude_model_names, model_infos_file, ban_ip_list=None, sanitize_ip=False, mode="simple"
+    log_files, exclude_model_names, ban_ip_list=None, sanitize_ip=False, mode="simple", task_name="image_editing"
 ):
     data = read_file_parallel(log_files, num_threads=16)
 
@@ -135,18 +135,6 @@ def clean_battle_data(
         "tievote": "tie",
         "bothbad_vote": "tie (bothbad)",
     }
-
-    if model_infos_file is not None:
-        with open(model_infos_file, 'r') as f:
-            model_infos = json.load(f)
-        for model in model_infos:
-            if "starting_from" in model_infos[model]:
-                model_infos[model]["starting_from"] = get_time_stamp_from_date(model_infos[model]["starting_from"])
-            else:
-                model_infos[model]["starting_from"] = 0
-    else:
-        model_infos = None
-    
     
     all_models = set()
     all_ips = dict()
@@ -216,6 +204,21 @@ def clean_battle_data(
 
         # Replace bard with palm
         models = [replace_model_name(m, row["tstamp"]) for m in models]
+        if task_name == "image_editing":
+            if not all(x.startswith("imagenhub_") and x.endswith("_edition") for x in models):
+                # print(f"Invalid model names: {models}")
+                ct_invalid += 1
+                continue
+            models = [x[len("imagenhub_"):-len("_edition")] for x in models]
+        elif task_name == "t2i_generation":
+            if not all(x.startswith("imagenhub_") and x.endswith("_generation") for x in models):
+                # print(f"Invalid model names: {models}")
+                ct_invalid += 1
+                continue
+            models = [x[len("imagenhub_"):-len("_generation")] for x in models]
+        else:
+            raise ValueError(f"Invalid task_name: {task_name}")
+        
         # Exclude certain models
         if exclude_model_names and any(x in exclude_model_names for x in models):
             ct_invalid += 1
@@ -226,9 +229,11 @@ def clean_battle_data(
 
         # # Exclude votes before the starting date
         # if model_infos and (model_infos[models[0]]["starting_from"] > row["tstamp"] or model_infos[models[1]]["starting_from"] > row["tstamp"]):
-        #     # print(f"Invalid vote before the valid starting date for {models[0]} and {models[1]}")
+        #     print(f"Invalid vote before the valid starting date for {models[0]} and {models[1]}")
         #     ct_invalid += 1
         #     continue
+        
+        
 
         if mode == "conv_release":
             # assert the two images are the same
@@ -319,11 +324,11 @@ def clean_battle_data(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model_infos_file", type=str)
     parser.add_argument("--max-num-files", type=int)
     parser.add_argument(
         "--mode", type=str, choices=["simple", "conv_release"], default="simple"
     )
+    parser.add_argument("--task_name", type=str, default="image_editing", choices=["image_editing", "t2i_generation"])
     parser.add_argument("--exclude-model-names", type=str, nargs="+")
     parser.add_argument("--ban-ip-file", type=str)
     parser.add_argument("--sanitize-ip", action="store_true", default=False)
@@ -333,7 +338,7 @@ if __name__ == "__main__":
     ban_ip_list = json.load(open(args.ban_ip_file)) if args.ban_ip_file else None
 
     battles = clean_battle_data(
-        log_files, args.exclude_model_names or [], args.model_infos_file, ban_ip_list, args.sanitize_ip, args.mode
+        log_files, args.exclude_model_names or [], ban_ip_list, args.sanitize_ip, args.mode, args.task_name
     )
     last_updated_tstamp = battles[-1]["tstamp"]
     cutoff_date = datetime.datetime.fromtimestamp(
@@ -352,7 +357,7 @@ if __name__ == "__main__":
         print("Samples:")
         for i in range(min(4, len(battles))):
             print(battles[i])
-        output = f"clean_battle_{cutoff_date}.json"
+        output = f"clean_battle_{args.task_name}_{cutoff_date}.json"
     elif args.mode == "conv_release":
         # new_battles = []
         # for x in battles:
@@ -362,7 +367,7 @@ if __name__ == "__main__":
         #         del x[key]
         #     new_battles.append(x)
         # battles = new_battles
-        output = f"clean_battle_conv_{cutoff_date}.json"
+        output = f"clean_battle_{args.task_name}_conv_{cutoff_date}.json"
 
     with open(output, "w") as fout:
         json.dump(battles, fout, indent=2, ensure_ascii=False)

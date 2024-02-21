@@ -1,0 +1,8 @@
+key,Model,Arena Elo rating (anony),Arena Elo rating (full),License,Organization,Link
+Prompt2prompt,Prompt2prompt,1252.820838097007,1216.6489026518666,Apache-2.0,"Google, Tel Aviv University",https://prompt-to-prompt.github.io
+PNP,PNP,1175.6261555831445,1171.3279007979363,-,Weizmann Institute of Science,https://github.com/MichalGeyer/plug-and-play
+InstructPix2Pix,InstructPix2Pix,1155.8431458813104,1142.6827834982837,"Copyright 2023 Timothy Brooks, Aleksander Holynski, Alexei A. Efros","University of California, Berkeley",https://www.timothybrooks.com/instruct-pix2pix
+MagicBrush,MagicBrush,1051.428411953954,1089.4499296239383,CC-BY-4.0,"The Ohio State University, University of Waterloo",https://osu-nlp-group.github.io/MagicBrush
+Pix2PixZero,Pix2PixZero,955.5903260059122,929.2296611307636,MIT License,"Carnegie Mellon University, Adobe Research",https://pix2pixzero.github.io
+CycleDiffusion,CycleDiffusion,771.4360186105207,753.4930725653142,X11,Carnegie Mellon University,https://github.com/ChenWu98/cycle-diffusion
+SDEdit,SDEdit,637.2551038681513,697.1677497318974,MIT License,Stanford University,https://sde-image-editing.github.io
