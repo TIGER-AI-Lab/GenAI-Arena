@@ -119,40 +119,21 @@ def model_hyperlink(model_name, link):
 
 
 def load_leaderboard_table_csv(filename, add_hyperlink=True):
-    lines = open(filename).readlines()
-    heads = [v.strip() for v in lines[0].split(",")]
-    rows = []
-    for i in range(1, len(lines)):
-        row = [v.strip() for v in lines[i].split(",")]
-        for j in range(len(heads)):
-            item = {}
-            for h, v in zip(heads, row):
-                if "Arena Elo rating" in h:
-                    if v != "-":
-                        v = int(ast.literal_eval(v))
-                    else:
-                        v = np.nan
-                elif h == "MMLU":
-                    if v != "-":
-                        v = round(ast.literal_eval(v) * 100, 1)
-                    else:
-                        v = np.nan
-                elif h == "MT-bench (win rate %)":
-                    if v != "-":
-                        v = round(ast.literal_eval(v[:-1]), 1)
-                    else:
-                        v = np.nan
-                elif h == "MT-bench (score)":
-                    if v != "-":
-                        v = round(ast.literal_eval(v), 2)
-                    else:
-                        v = np.nan
-                item[h] = v
-            if add_hyperlink:
-                item["Model"] = model_hyperlink(item["Model"], item["Link"])
-        rows.append(item)
+    df = pd.read_csv(filename)
+    for col in df.columns:
+        if "Arena Elo rating" in col:
+            df[col] = df[col].apply(lambda x: int(x) if x != "-" else np.nan)
+        elif col == "MMLU":
+            df[col] = df[col].apply(lambda x: round(x * 100, 1) if x != "-" else np.nan)
+        elif col == "MT-bench (win rate %)":
+            df[col] = df[col].apply(lambda x: round(x, 1) if x != "-" else np.nan)
+        elif col == "MT-bench (score)":
+            df[col] = df[col].apply(lambda x: round(x, 2) if x != "-" else np.nan)
+        
+        if add_hyperlink and col == "Model":
+            df[col] = df.apply(lambda row: model_hyperlink(row[col], row["Link"]), axis=1)
+    return df
 
-    return rows
 
 
 def build_basic_stats_tab():
@@ -293,9 +274,7 @@ def build_leaderboard_tab(elo_results_file, leaderboard_table_file, show_plot=Fa
     md_1 = gr.Markdown(md, elem_id="leaderboard_markdown")
 
     if leaderboard_table_file:
-        data = load_leaderboard_table_csv(leaderboard_table_file)
-        model_table_df = pd.DataFrame(data)
-
+        model_table_df = load_leaderboard_table_csv(leaderboard_table_file)
         with gr.Tabs() as tabs:
             # arena table
             arena_table_vals = get_arena_table(anony_arena_df, model_table_df)
