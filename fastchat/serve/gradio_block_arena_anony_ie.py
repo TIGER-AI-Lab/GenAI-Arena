@@ -75,6 +75,13 @@ def vote_last_response(states, vote_type, model_selectors, request: gr.Request):
             "ip": get_ip(request),
         }
         fout.write(json.dumps(data) + "\n")
+    for state in states:
+        output_file = f'/ML-A100/team/mm/zhangge/FastChat/image_results/edition/{state.conv_id}_{state.model_name}.jpg'
+        source_file = f'/ML-A100/team/mm/zhangge/FastChat/image_results/edition/{state.conv_id}_{state.model_name}_source.jpg'
+        with open(output_file, 'w') as f:
+            state.output.save(f, 'JPEG')
+        with open(source_file, 'w') as sf:
+            state.conv[2].save(sf, 'JPEG')
 
     if ":" not in model_selectors[0]:
         for i in range(15):

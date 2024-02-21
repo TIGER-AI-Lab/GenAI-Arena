@@ -140,7 +140,8 @@ class ImageState:
         base = {
                 "conv_id": self.conv_id,
                 "model_name": self.model_name,
-                "online_load": self.online_load
+                "online_load": self.online_load,
+                "prompt": self.prompt
                 }
         return base
 
@@ -245,7 +246,10 @@ def vote_last_response(state, vote_type, model_selector, request: gr.Request):
             "ip": get_ip(request),
         }
         fout.write(json.dumps(data) + "\n")
-
+    # logger.info(f"state.output: {state.output.size}")
+    output_file = f'/ML-A100/team/mm/zhangge/FastChat/image_results/generation/{state.conv_id}_{state.model_name}.jpg'
+    with open(output_file, 'w') as f:
+        state.output.save(f, 'JPEG')
 
 def upvote_last_response(state, model_selector, request: gr.Request):
     ip = get_ip(request)
@@ -538,6 +542,7 @@ def diffusion_response(state, request: gr.Request):
     # output = data
     # if "vicuna" in model_name:
     #     output = post_process_code(output)
+    state.prompt = prompt
     state.output = output
     # yield (state, state.to_gradio_chatbot()) + (enable_btn,) * 5
     yield (state, output) + (enable_btn,) * 5

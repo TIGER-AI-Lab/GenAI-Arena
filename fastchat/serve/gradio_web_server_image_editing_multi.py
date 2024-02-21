@@ -488,13 +488,12 @@ if __name__ == "__main__":
     #     auth=auth,
     # )
     demo.queue(
-        concurrency_count=args.concurrency_count, status_update_rate=10, api_open=False,
+        concurrency_count=args.concurrency_count, status_update_rate=10, api_open=False, max_size=1
     ).launch(
         server_name=args.host,
         server_port=args.port,
         share=args.share,
         max_threads=800,
-        root_path="/AIGenArena",
         auth=auth,
     )
 
