@@ -94,6 +94,7 @@ class BaseModelWorker:
             "worker_status": self.get_status(),
         }
         r = requests.post(url, json=data)
+        logger.info(r.status_code)
         assert r.status_code == 200
 
     def send_heart_beat(self):
