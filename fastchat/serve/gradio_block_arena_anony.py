@@ -76,7 +76,7 @@ def vote_last_response(states, vote_type, model_selectors, request: gr.Request):
         }
         fout.write(json.dumps(data) + "\n")
     for state in states:
-        output_file = f'/ML-A100/team/mm/zhangge/FastChat/image_results/generation/{state.conv_id}_{state.model_name}.jpg'
+        output_file = f'./image_results/generation/{state.conv_id}_{state.model_name}.jpg'
         with open(output_file, 'w') as f:
             state.output.save(f, 'JPEG')
 
