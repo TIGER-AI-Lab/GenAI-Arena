@@ -1,0 +1,37 @@
+{
+    "CycleDiffusion": {
+        "Link": "https://github.com/ChenWu98/cycle-diffusion",
+        "License": "X11",
+        "Organization": "Carnegie Mellon University"
+    },
+    "PNP": {
+        "Link": "https://github.com/MichalGeyer/plug-and-play",
+        "License": "-",
+        "Organization": "Weizmann Institute of Science"
+    },
+    "InstructPix2Pix": {
+        "Link": "https://www.timothybrooks.com/instruct-pix2pix",
+        "License": "Copyright 2023 Timothy Brooks, Aleksander Holynski, Alexei A. Efros",
+        "Organization": "University of California, Berkeley"
+    },
+    "Pix2PixZero": {
+        "Link": "https://pix2pixzero.github.io",
+        "License": "MIT License",
+        "Organization": "Carnegie Mellon University, Adobe Research"
+    },
+    "MagicBrush": {
+        "Link": "https://osu-nlp-group.github.io/MagicBrush",
+        "License": "CC-BY-4.0",
+        "Organization": "The Ohio State University, University of Waterloo"
+    },
+    "Prompt2prompt": {
+        "Link": "https://prompt-to-prompt.github.io",
+        "License": "Apache-2.0",
+        "Organization": "Google, Tel Aviv University"
+    },
+    "SDEdit": {
+        "Link": "https://sde-image-editing.github.io",
+        "License": "MIT License",
+        "Organization": "Stanford University"
+    }
+}

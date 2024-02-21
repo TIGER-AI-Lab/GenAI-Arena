@@ -1,0 +1,6 @@
+*.log
+*.json
+__pycache__/
+*log*
+*.egg-info/
+/src

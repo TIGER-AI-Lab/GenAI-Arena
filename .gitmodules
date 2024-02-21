@@ -1,0 +1,3 @@
+[submodule "ImagenHub"]
+	path = ImagenHub
+	url = https://github.com/TIGER-AI-Lab/ImagenHub.git

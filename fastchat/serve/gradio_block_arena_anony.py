@@ -705,10 +705,10 @@ Find out who is the 🥇conditional image generation models! More models are goi
     gr.Markdown(acknowledgment_md, elem_id="ack_markdown")
 
     gr.Examples(
-        examples=[["a cute dog is playing a ball", os.path.join("/ML-A100/team/mm/zhangge/FastChat/examples", "dog.jpg")],
-                  ["Buildings on fire, old film still", os.path.join("/ML-A100/team/mm/zhangge/FastChat/examples", "fire.jpg")],
-                  ["Lonely evil bananas on a table, hard light chiaroscuro, realistic",os.path.join("/ML-A100/team/mm/zhangge/FastChat/examples", "banana.jpg")],
-                  ["A futuristic hopeful busy city, purple and green color scheme", os.path.join("/ML-A100/team/mm/zhangge/FastChat/examples", "city.jpg")]],
+        examples=[["a cute dog is playing a ball", os.path.join("./examples", "dog.jpg")],
+                  ["Buildings on fire, old film still", os.path.join("./examples", "fire.jpg")],
+                  ["Lonely evil bananas on a table, hard light chiaroscuro, realistic",os.path.join("./examples", "banana.jpg")],
+                  ["A futuristic hopeful busy city, purple and green color scheme", os.path.join("./examples", "city.jpg")]],
         inputs = [textbox, chatbots[0]])
 
     # Register listeners

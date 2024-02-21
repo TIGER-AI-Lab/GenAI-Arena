@@ -1,0 +1,7 @@
+key,Model,Arena Elo rating (anony),Arena Elo rating (full),License,Organization,Link
+PlayGroundV2,PlayGroundV2,1151.1834096302248,1150.901721636401,Playground v2 Community License,Playground,https://huggingface.co/playgroundai/playground-v2-1024px-aesthetic
+PixArtAlpha,PixArtAlpha,1078.3583466674136,1069.815012597113,openrail++,PixArt-alpha,https://huggingface.co/PixArt-alpha/PixArt-XL-2-1024-MS
+SDXL,SDXL,1027.258044463298,1035.47732509915,openrail++,Stability AI,https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0
+SDXLTurbo,SDXLTurbo,972.0904914158416,969.4933207298967,sai-nc-community (other),Stability AI,https://huggingface.co/stabilityai/sdxl-turbo
+OpenJourney,OpenJourney,921.3424873878607,906.3184453708288,creativeml-openrail-m,PromptHero,https://huggingface.co/prompthero/openjourney
+LCM,LCM,849.7672204353615,868.2154196730218,MIT License,Tsinghua University,https://huggingface.co/SimianLuo/LCM_Dreamshaper_v7

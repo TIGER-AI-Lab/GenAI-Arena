@@ -1,0 +1,32 @@
+{
+    "LCM": {
+        "Link": "https://huggingface.co/SimianLuo/LCM_Dreamshaper_v7",
+        "License": "MIT License",
+        "Organization": "Tsinghua University"
+    },
+    "PlayGroundV2": {
+        "Link": "https://huggingface.co/playgroundai/playground-v2-1024px-aesthetic",
+        "License": "Playground v2 Community License",
+        "Organization": "Playground"
+    },
+    "OpenJourney": {
+        "Link": "https://huggingface.co/prompthero/openjourney",
+        "License": "creativeml-openrail-m",
+        "Organization": "PromptHero"
+    },
+    "SDXLTurbo": {
+        "Link": "https://huggingface.co/stabilityai/sdxl-turbo",
+        "License": "sai-nc-community (other)",
+        "Organization": "Stability AI"
+    },
+    "SDXL": {
+        "Link": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0",
+        "License": "openrail++",
+        "Organization": "Stability AI"
+    },
+    "PixArtAlpha": {
+        "Link": "https://huggingface.co/PixArt-alpha/PixArt-XL-2-1024-MS",
+        "License": "openrail++",
+        "Organization": "PixArt-alpha"
+    }
+}

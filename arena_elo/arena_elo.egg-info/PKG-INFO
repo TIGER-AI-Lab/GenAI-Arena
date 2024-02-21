@@ -1,0 +1,72 @@
+Metadata-Version: 2.1
+Name: arena_elo
+Version: 0.2.35
+Summary: Elo rating system for WildVision Bench Arena
+Project-URL: Homepage, https://github.com/WildVision-Bench/Arena-Elo
+Project-URL: Bug Tracker, https://github.com/WildVision-Bench/Arena-Elo/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: Apache Software License
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy
+Requires-Dist: prompt_toolkit>=3.0.0
+Requires-Dist: uvicorn
+Requires-Dist: polyglot
+Requires-Dist: pyicu
+Requires-Dist: pycld2
+Requires-Dist: morfessor
+Requires-Dist: scikit-learn
+Requires-Dist: pytz
+Requires-Dist: tqdm
+Requires-Dist: pandas
+Requires-Dist: plotly
+Requires-Dist: fire
+Requires-Dist: Pillow
+
+## Computing the Elo Ratings
+
+
+```bash
+apt-get -y install pkg-config
+pip install -r requirements.txt
+```
+
+
+### to update the leaderboard
+
+```bash
+export LOGDIR="/path/to/your/logdir"
+bash update_elo_rating.sh
+```
+
+### to inspect the leaderboard status
+```bash
+python -m elo_rating.inspect_elo_rating_pkl
+```
+
+### to inspect the collected data status and cost
+```bash
+export LOGDIR="/path/to/your/logdir"
+python -m elo_rating.inspect_cost
+```
+
+### to upload the battle data to hugging face🤗 
+```bash
+export HUGGINGFACE_TOKEN="your_huggingface_token"
+bash get_latest_data.sh
+python -m elo_rating.upload_battle_data --repo_id "WildVision/wildvision-bench" --log_dir "./vision-arena-logs/"
+```
+
+### to upload the chat data to hugging face🤗 
+```bash
+export HUGGINGFACE_TOKEN="your_huggingface_token"
+bash get_latest_data.sh
+python -m elo_rating.upload_chat_data --repo_id "WildVision/wildvision-bench" --log_dir "./vision-arena-logs/"
+```
+
+
+### to get the collected data
+```bash
+python -m 
+

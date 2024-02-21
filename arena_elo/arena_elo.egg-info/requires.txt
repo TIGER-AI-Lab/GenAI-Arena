@@ -1,0 +1,14 @@
+numpy
+prompt_toolkit>=3.0.0
+uvicorn
+polyglot
+pyicu
+pycld2
+morfessor
+scikit-learn
+pytz
+tqdm
+pandas
+plotly
+fire
+Pillow

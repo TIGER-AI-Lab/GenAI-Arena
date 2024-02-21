@@ -6,7 +6,7 @@ It supports chatting with a single model or chatting with two models side-by-sid
 import argparse
 import pickle
 import time
-
+from pathlib import Path
 import gradio as gr
 
 from fastchat.constants import (
@@ -288,7 +288,7 @@ def build_combine_demo(models, elo_results_file, leaderboard_table_file):
                         )
                     if elo_results_file:
                         with gr.Tab("Generation Leaderboard", id=3):
-                            build_leaderboard_tab(elo_results_file, leaderboard_table_file)
+                            build_leaderboard_tab(elo_results_file['t2i_generation'], leaderboard_table_file['t2i_generation'])
                     with gr.Tab("About Us", id=4):
                         about = build_about()
             with gr.Tab("Image Edition", id=5):
@@ -305,7 +305,7 @@ def build_combine_demo(models, elo_results_file, leaderboard_table_file):
                         )
                     if elo_results_file:
                         with gr.Tab("Edition Leaderboard", id=8):
-                            build_leaderboard_tab(elo_results_file, leaderboard_table_file)
+                            build_leaderboard_tab(elo_results_file['image_editing'], leaderboard_table_file['image_editing'])
                     with gr.Tab("About Us", id=9):
                         about = build_about()
 
@@ -410,11 +410,16 @@ if __name__ == "__main__":
         default=None,
     )
     parser.add_argument(
-        "--elo-results-file", type=str, help="Load leaderboard results and plots"
+        "--elo_results_dir",
+        type=str,
+        help="Load leaderboard results and plots"
     )
-    parser.add_argument(
-        "--leaderboard-table-file", type=str, help="Load leaderboard results and plots"
-    )
+    # parser.add_argument(
+    #     "--elo-results-file", type=str, help="Load leaderboard results and plots"
+    # )
+    # parser.add_argument(
+    #     "--leaderboard-table-file", type=str, help="Load leaderboard results and plots"
+    # )
     args = parser.parse_args()
     logger.info(f"args: {args}")
 
@@ -450,6 +455,28 @@ if __name__ == "__main__":
     if args.gradio_auth_path is not None:
         auth = parse_gradio_auth_creds(args.gradio_auth_path)
 
+    from collections import defaultdict
+    args.elo_results_file = defaultdict(lambda: None)
+    args.leaderboard_table_file = defaultdict(lambda: None)
+    if args.elo_results_dir is not None:
+        args.elo_results_dir = Path(args.elo_results_dir)
+        args.elo_results_file = {}
+        args.leaderboard_table_file = {}
+        for file in args.elo_results_dir.glob('elo_results_*.pkl'):
+            if 't2i_generation' in file.name:
+                args.elo_results_file['t2i_generation'] = file
+            elif 'image_editing' in file.name:
+                args.elo_results_file['image_editing'] = file
+            else:
+                raise ValueError(f"Unknown file name: {file.name}")
+        for file in args.elo_results_dir.glob('*_leaderboard.csv'):
+            if 't2i_generation' in file.name:
+                args.leaderboard_table_file['t2i_generation'] = file
+            elif 'image_editing' in file.name:
+                args.leaderboard_table_file['image_editing'] = file
+            else:
+                raise ValueError(f"Unknown file name: {file.name}")
+        
     # Launch the demo
     # demo = build_demo(models, args.elo_results_file, args.leaderboard_table_file)
     demo = build_combine_demo(models, args.elo_results_file, args.leaderboard_table_file)
