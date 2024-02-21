@@ -20,7 +20,7 @@ def main(
     full_leaderboard_data = full_elo_rating_results["leaderboard_table_df"]
     
     # Model,MT-bench (score),Arena Elo rating,MMLU,License,Link
-    fields = ["key", "Model", "Arena Elo rating (anony)", "Arena Elo rating (full)", "License", "Organization", "Link"]
+    fields = ["key", "Model", "Arena Elo rating", "License", "Organization", "Link"]
     # set Organization and license to empty for now
     all_models = anony_leaderboard_data.index.tolist()
     
@@ -42,7 +42,11 @@ def main(
             model_info[model]["Arena Elo rating (full)"] = full_leaderboard_data.loc[model, "rating"]
         else:
             model_info[model]["Arena Elo rating (full)"] = 0
-    
+        # if model in anony_leaderboard_data.index:
+        #     model_info[model]["Arena Elo rating"] = anony_leaderboard_data.loc[model, "rating"]
+        # else:
+        #     model_info[model]["Arena Elo rating"] = 0
+            
     final_model_info = {}
     for model in model_info:
         if "Model" in model_info[model]:

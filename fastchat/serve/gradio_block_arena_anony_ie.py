@@ -716,13 +716,13 @@ Find out who is the 🥇conditional image edition models!
     gr.Examples(
         examples=[
             ["a bowl of strawberries", "a bowl of oranges", "change strawberries to oranges",
-             os.path.join("/ML-A100/team/mm/zhangge/FastChat/examples", "strawberries.jpg")],
+             os.path.join("./examples", "strawberries.jpg")],
             ["a pig is eating an ice cream", "a rabbit is eating an ice cream", "change pig to rabbit",
-             os.path.join("/ML-A100/team/mm/zhangge/FastChat/examples", "pig.jpg")],
+             os.path.join("./examples", "pig.jpg")],
             ["a rubber duck in a swimming pool", "a rubber duck with a hat in a swimming pool", "add a hat to the duck",
-             os.path.join("/ML-A100/team/mm/zhangge/FastChat/examples", "duck.jpg")],
+             os.path.join("./examples", "duck.jpg")],
             ["a photo of a cat", "a photo of a mouse", "change cat to mouse",
-             os.path.join("/ML-A100/team/mm/zhangge/FastChat/examples", "cat.jpeg")]],
+             os.path.join("./examples", "cat.jpeg")]],
         inputs=[textbox_source, textbox_target, textbox_instruct, source_image])
 
     # Register listeners
