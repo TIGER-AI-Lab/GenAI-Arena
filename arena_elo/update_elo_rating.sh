@@ -1,7 +1,7 @@
-export LOGDIR="/home/tianle/arena_vote" # for local
 # set LOGDIR to default if not set before
 if [ -z "$LOGDIR" ]; then
-    export LOGDIR="./vision-arena-logs"
+    echo "LOGDIR is not set. Please set LOGDIR to the directory where the logs will be stored. Command: export LOGDIR=/path/to/logdir"
+    exit 1
 fi
 
 mkdir -p results
