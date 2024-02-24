@@ -4,7 +4,7 @@
         "License": "MIT License",
         "Organization": "Tsinghua University"
     },
-    "PlayGroundV2": {
+    "Playground v2": {
         "Link": "https://huggingface.co/playgroundai/playground-v2-1024px-aesthetic",
         "License": "Playground v2 Community License",
         "Organization": "Playground"
@@ -28,5 +28,15 @@
         "Link": "https://huggingface.co/PixArt-alpha/PixArt-XL-2-1024-MS",
         "License": "openrail++",
         "Organization": "PixArt-alpha"
+    },
+    "SDXLLightning": {
+        "Link": "https://huggingface.co/ByteDance/SDXL-Lightning",
+        "License": "openrail++",
+        "Organization": "ByteDance"
+    },
+    "StableCascade": {
+        "Link": "https://huggingface.co/stabilityai/stable-cascade",
+        "License": "stable-cascade-nc-community (other)",
+        "Organization": "Stability AI"
     }
 }

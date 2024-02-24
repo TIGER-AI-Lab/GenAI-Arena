@@ -464,6 +464,20 @@ register_model_info(
 )
 
 register_model_info(
+    ["Playground v2"],
+    "Playground v2",
+    "https://huggingface.co/playgroundai/playground-v2-1024px-aesthetic",
+    "Playground v2 – 1024px Aesthetic Model",
+)
+
+register_model_info(
+    ["Playground v2.5"],
+    "Playground v2.5",
+    "https://playground.stream/en",
+    "Playground v2.5 (not publicly released)",
+)
+
+register_model_info(
     ["imagenhub_OpenJourney_generation"],
     "OpenJourney",
     "https://huggingface.co/prompthero/openjourney",
@@ -489,6 +503,20 @@ register_model_info(
     "PixArtAlpha",
     "https://huggingface.co/PixArt-alpha/PixArt-XL-2-1024-MS",
     "Pixart-α consists of pure transformer blocks for latent diffusion.",
+)
+
+register_model_info(
+    ["imagenhub_SDXLLightning_generation"],
+    "SDXL-Lightning",
+    "https://huggingface.co/ByteDance/SDXL-Lightning",
+    "SDXL-Lightning is a lightning-fast text-to-image generation model.",
+)
+
+register_model_info(
+    ["imagenhub_StableCascade_generation"],
+    "StableCascade",
+    "https://huggingface.co/stabilityai/stable-cascade",
+    "StableCascade is built upon the Würstchen architecture and working at a much smaller latent space.",
 )
 
 register_model_info(

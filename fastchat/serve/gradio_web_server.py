@@ -52,7 +52,7 @@ from fastchat.serve.base_model_worker import app
 import uvicorn
 
 
-logger = build_logger("gradio_web_server", "gradio_web_server.log")
+logger = build_logger("gradio_web_server", "logs/gradio_web_server.log")
 
 headers = {"User-Agent": "FastChat Client"}
 

@@ -38,6 +38,7 @@ from fastchat.model.model_xfastertransformer import generate_stream_xft
 from fastchat.model.model_stable_diffusion import generate_stream_sde
 from fastchat.model.model_imagenhub import generate_stream_imagen
 from fastchat.model.model_imagenhub_ie import generate_stream_imagen_ie
+from fastchat.model.model_playground import generate_stream_playground
 from fastchat.model.monkey_patch_non_inplace import (
     replace_llama_attn_with_non_inplace_operations,
 )
@@ -51,7 +52,7 @@ from diffusers import StableDiffusionPipeline
 import imagen_hub
 
 
-logger = build_logger("model_adapter", 'model_adapter.log')
+logger = build_logger("model_adapter", 'logs/model_adapter.log')
 
 # Check an environment variable to check if we should be sharing Peft model
 # weights.  When false we treat all Peft models as separate.
@@ -343,8 +344,9 @@ def load_model(
         "xpu",
         "npu",
     ):
-        if model_path.startswith("imagenhub"):
-            model.pipe.to(device)
+        if model_path.startswith("imagenhub") or 'playground' in model_path.lower():
+            if 'playground' not in model_path.lower():
+                model.pipe.to(device)
         else:
             model.to(device)
             # accelerate.cpu_offload(model.pipe, device)
@@ -367,11 +369,14 @@ def get_conversation_template(model_path: str) -> Conversation:
     return adapter.get_default_conv_template(model_path)
 
 
-def get_generate_stream_function(model: torch.nn.Module, model_path: str):
+def get_generate_stream_function(model, model_path: str):
     """Get the generate_stream function for inference."""
     from fastchat.serve.inference import generate_stream
 
-    model_type = str(type(model)).lower()
+    if isinstance(model, str):
+        model_type = model.lower()
+    else:
+        model_type = str(type(model)).lower()
     is_chatglm = "chatglm" in model_type
     is_falcon = "rwforcausallm" in model_type
     is_codet5p = "codet5p" in model_type
@@ -379,8 +384,12 @@ def get_generate_stream_function(model: torch.nn.Module, model_path: str):
     is_exllama = "exllama" in model_type
     is_xft = "xft" in model_type
     is_sdm = "stable" in model_type
-    t2i_models = ['lcm', 'sdxl', 'sdxlturbo', 'pixartalpha', 'openjourney', 'playgroundv2', 'ssd']
+    t2i_models = ['lcm', 'sdxl', 'sdxlturbo', 'pixartalpha', 'openjourney', 'ssd', 'cascade', 'sdxllight']
     is_imagen_t2i = "imagen" in model_type and any([x in model_type for x in t2i_models])
+    is_playground_t2i = 'playground' in model_type
+
+    if is_imagen_t2i:
+        is_sdm = False
     ie_models = ['diffedit', 'imagic', 'instructpix2pix', 'magicbrush', 'prompt2prompt', 'sdedit', 'cyclediffusion',
                  'pnp', 'text2live', 'pix2pixzero']
     is_imagen_ie = "imagen" in model_type and any([x in model_type for x in ie_models])
@@ -397,6 +406,8 @@ def get_generate_stream_function(model: torch.nn.Module, model_path: str):
         return generate_stream_xft
     elif is_sdm:
         return generate_stream_sde
+    elif is_playground_t2i:
+        return generate_stream_playground
     elif is_imagen_t2i:
         return generate_stream_imagen
     elif is_imagen_ie:
@@ -2044,13 +2055,15 @@ class StableDiffusionAdapter(BaseModelAdapter):
 class ImagenhubAdapter(BaseModelAdapter):
     """The model adapter for Imagenhub model"""
     def match(self, model_path: str):
-        return "imagenhub" in model_path.lower()
+        return "imagenhub" in model_path.lower() or "playground" in model_path.lower()
 
     def load_model(self, model_path: str, from_pretrained_kwargs: dict):
-        model_name = list(model_path.split('_'))[1]
-        model = imagen_hub.load(model_name)
-
-        return model, model.pipe.tokenizer
+        if "playground" in model_path.lower():
+            return model_path, None
+        else:
+            model_name = list(model_path.split('_'))[1]
+            model = imagen_hub.load(model_name)
+            return model, model.pipe.tokenizer
 
     def get_default_conv_template(self, model_path: str) -> Conversation:
         return get_conv_template("solar")

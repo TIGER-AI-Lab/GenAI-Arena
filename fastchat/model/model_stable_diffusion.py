@@ -66,8 +66,10 @@ def generate_stream_sde(
     #     stopping_criteria=StoppingCriteriaList([CodeBlockStopper()]),
     # )
     generation_kwargs = {"prompt": prompt}
-    model.scheduler = DDIMScheduler.from_config(model.scheduler.config)
-    logger.info(f"model.scheduler: {model.scheduler}")
+    logger.info(f"str(type(model)): {str(type(model))}")
+    if "StableCascade" not in str(type(model)):
+        model.scheduler = DDIMScheduler.from_config(model.scheduler.config)
+        logger.info(f"model.scheduler: {model.scheduler}")
     thread = Thread(target=model, kwargs=generation_kwargs)
     thread.start()
     # i = 0

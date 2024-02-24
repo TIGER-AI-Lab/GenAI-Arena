@@ -211,11 +211,15 @@ def clean_battle_data(
                 continue
             models = [x[len("imagenhub_"):-len("_edition")] for x in models]
         elif task_name == "t2i_generation":
-            if not all(x.startswith("imagenhub_") and x.endswith("_generation") for x in models):
+            if not all("playground" in x.lower() or (x.startswith("imagenhub_") and x.endswith("_generation")) for x in models):
                 # print(f"Invalid model names: {models}")
                 ct_invalid += 1
                 continue
-            models = [x[len("imagenhub_"):-len("_generation")] for x in models]
+            # models = [x[len("imagenhub_"):-len("_generation")] for x in models]
+            for i, model_name in enumerate(models):
+                if model_name.startswith("imagenhub_"):
+                    models[i] = model_name[len("imagenhub_"):-len("_generation")]
+
         else:
             raise ValueError(f"Invalid task_name: {task_name}")
         

@@ -92,16 +92,19 @@ class ModelWorker(BaseModelWorker):
             debug=debug,
         )
         self.device = device
-        if self.tokenizer.pad_token == None:
+        if self.tokenizer and self.tokenizer.pad_token == None:
             self.tokenizer.pad_token = self.tokenizer.eos_token
-        if model_path.startswith("imagenhub"):
-            if 'PNP' in model_path:
+        if model_path.startswith("imagenhub") or 'playground' in model_path.lower():
+            if 'PNP' in model_path or 'playground' in model_path.lower():
                 self.context_len = 100
             else:
                 self.context_len = get_context_length(self.model.pipe.config)
         else:
             self.context_len = get_context_length(self.model.config)
-        logger.info(f"model type: {str(type(self.model)).lower()}")
+        if 'playground' in model_path.lower():
+            logger.info(f"model type: {self.model.lower()}")
+        else:
+            logger.info(f"model type: {str(type(self.model)).lower()}")
         self.generate_stream_func = get_generate_stream_function(self.model, model_path)
         self.stream_interval = stream_interval
         self.embed_in_truncate = embed_in_truncate

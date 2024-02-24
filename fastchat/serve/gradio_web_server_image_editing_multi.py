@@ -53,7 +53,7 @@ from fastchat.utils import (
 )
 import pdb
 
-logger = build_logger("gradio_web_server_multi_ie", "gradio_web_server_multi_ie.log")
+logger = build_logger("gradio_web_server_multi_ie", "logs/gradio_web_server_multi_ie.log")
 
 
 def load_demo(url_params, request: gr.Request):
@@ -182,7 +182,7 @@ def load_combine_demo(url_params, request: gr.Request):
     models_anony = list(models)
 
     models_anony_ie = [x for x in models_anony if "edition" in x]
-    models_anony_ig = [x for x in models_anony if "generation" in x]
+    models_anony_ig = [x for x in models_anony if "generation" in x or "playground" in x.lower()]
 
     models_anony_ig = list(set(models_anony_ig))
     models_anony_ie = list(set(models_anony_ie))
@@ -272,7 +272,7 @@ def build_combine_demo(models, elo_results_file, leaderboard_table_file):
         logger.info("build demo")
         url_params = gr.JSON(visible=False)
         models_ie = [x for x in models if "edition" in x]
-        models_ig = [x for x in models if "generation" in x]
+        models_ig = [x for x in models if "generation" in x or "playground" in x.lower()]
         with gr.Tabs() as tabs_combine:
             with gr.Tab("Image Generation", id=0):
                 with gr.Tabs() as tabs_ig:
