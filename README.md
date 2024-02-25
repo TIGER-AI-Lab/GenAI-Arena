@@ -63,3 +63,10 @@ export LOGDIR="/home/tianle/arena_vote"
 bash update_elo.sh
 ```
 then results are updated in `arena_elo/results/latest/`
+
+### WishList
+
+1. LEDITS: https://huggingface.co/spaces/editing-images/ledits
+2. InfEdit: https://huggingface.co/spaces/sled-umich/InfEdit
+3. MGIE: https://huggingface.co/spaces/tsujuifu/ml-mgie
+4. OpenDalle: dataautogpt3/OpenDalleV1.1
