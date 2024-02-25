@@ -69,4 +69,4 @@ then results are updated in `arena_elo/results/latest/`
 1. LEDITS: https://huggingface.co/spaces/editing-images/ledits
 2. InfEdit: https://huggingface.co/spaces/sled-umich/InfEdit
 3. MGIE: https://huggingface.co/spaces/tsujuifu/ml-mgie
-4. OpenDalle: dataautogpt3/OpenDalleV1.1
+4. OpenDalle: https://huggingface.co/dataautogpt3/OpenDalleV1.1
