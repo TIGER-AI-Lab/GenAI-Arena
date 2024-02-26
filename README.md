@@ -28,9 +28,9 @@ CUDA_VISIBLE_DEVICES=6 nohup python3 -m fastchat.serve.model_worker --model-path
 
 CUDA_VISIBLE_DEVICES=5 nohup python3 -m fastchat.serve.model_worker --model-path imagenhub_StableCascade_generation --controller http://localhost:21001 --port 31023 --worker http://localhost:31023 --limit-worker-concurrency 1 > model_log/StableCascade.log &
 
-nohup python3 -m fastchat.serve.model_worker --model-path “Playground v2.5” --controller http://localhost:21001 --port 31024 --worker http://localhost:31024 --limit-worker-concurrency 1 > model_log/PlayGroundV2.5.log &
+nohup python3 -m fastchat.serve.model_worker --model-path "Playground v2.5" --controller http://localhost:21001 --port 31024 --worker http://localhost:31024 --limit-worker-concurrency 1 > model_log/PlayGroundV2.5.log &
 
-nohup python3 -m fastchat.serve.model_worker --model-path “Playground v2” --controller http://localhost:21001 --port 31021 --worker http://localhost:31021 --limit-worker-concurrency 1 > model_log/PlayGroundV2.log &
+nohup python3 -m fastchat.serve.model_worker --model-path "Playground v2" --controller http://localhost:21001 --port 31021 --worker http://localhost:31021 --limit-worker-concurrency 1 > model_log/PlayGroundV2.log &
 
 
 
