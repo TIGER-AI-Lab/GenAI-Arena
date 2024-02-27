@@ -3,7 +3,7 @@
 ```
 pip install -e .
 pip install -r imagenhub_requirements.txt
-cd ImageHub && pip install -e .
+cd ImagenHub && pip install -e .
 ```
 
 ### run
